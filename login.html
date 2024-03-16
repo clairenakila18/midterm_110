@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Signup Form with Error handling</title>
+    <style>
+      body {
+        background-color: white;
+        /*background-color: #453e51ae;*/
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .login-container {
+        background: #1f5858;
+        /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #b19eb2, #d9b0d2);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #b19eb2, #d9b0d2);
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        border-top-right-radius: 40px;
+        border-bottom-left-radius: 40px;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+          rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        padding: 50px;
+        border-radius: 8px;
+        text-align: center;
+        width: 300px;
+      }
+
+      .input-group {
+        margin-bottom: 15px;
+        text-align: left;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: rgba(36, 25, 33, 0.716);
+      }
+
+      input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        background-color: #fff;
+        color: rgba(173, 11, 138, 0.716);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      /* Style for switching between login and signup forms */
+      #signupFormContainer {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div id="loginFormContainer">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <div class="input-group">
+            <label for="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              placeholder="Username"
+            />
+          </div>
+          <div class="input-group">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              placeholder="Password"
+            />
+          </div>
+          <div class="input-group">
+            <label for="userType">User Type:</label>
+            <select id="userType" name="userType">
+              <option value="buyer">Buyer</option>
+              <option value="seller">Seller</option>
+            </select>
+          </div>
+          <button type="button" onclick="login()">Login</button>
+          <p>
+            Don't have an account?
+            <a href="#" onclick="switchToSignup()">Signup</a>
+          </p>
+        </form>
+      </div>
+
+      <div id="signupFormContainer" style="display: none">
+        <h2>Signup</h2>
+        <form id="signupForm">
+          <div class="input-group">
+            <label for="newUsername">Username:</label>
+            <input type="text" id="newUsername" name="newUsername" required />
+          </div>
+          <div class="input-group">
+            <label for="newEmail">Email:</label>
+            <input type="email" id="newEmail" name="newEmail" required />
+          </div>
+          <div class="input-group">
+            <label for="newPassword">Password:</label>
+            <input
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="userType">User Type:</label>
+            <select id="newUserType" name="newUserType">
+              <option value="buyer">Buyer</option>
+              <option value="seller">Seller</option>
+            </select>
+          </div>
+          <button type="button" onclick="signup()">Signup</button>
+          <p>
+            Already have an account?
+            <a href="#" onclick="switchToLogin()">Login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function validateEmail(email) {
+        const emailRegex =
+          /^(?:(?![a-zA-Z0-9]{3}).)*([a-zA-Z0-9]+)@([a-zA-Z0-9]+\.(com|gov\.ph|edu\.ph|carsu\.edu\.ph|otherdomains)(?:\.[a-zA-Z]+)?)$/;
+        const allowedDomains = [
+          "gmail.com",
+          "gov.ph",
+          "edu.ph",
+          "email.com",
+          "otherdomains",
+        ];
+
+        const matches = email.match(emailRegex);
+        if (!matches) {
+          return false; // Invalid format or misspelled domain
+        }
+
+        const domain = matches[2];
+
+        // Check if the domain is in the allowed list
+        return allowedDomains.includes(domain);
+      }
+
+      function containsQuotes(email) {
+        return /["']/.test(email);
+      }
+
+      function hasConsecutiveVowelsOrConsonants(email) {
+        const consecutiveVowelsRegex = /[aeiou]{3}/i; // Case-insensitive regex for three consecutive vowels
+        const consecutiveConsonantsRegex = /[bcdfghjklmnpqrstvwxyz]{3}/i; // Case-insensitive regex for three consecutive consonants
+
+        // Check for three consecutive vowels or consonants
+        return (
+          consecutiveVowelsRegex.test(email) ||
+          consecutiveConsonantsRegex.test(email)
+        );
+      }
+
+      function isCombinationOfVowelsConsonantsNumbers(email) {
+        const vowelsRegex = /[aeiou]/i; // Case-insensitive regex for vowels
+        const consonantsRegex = /[bcdfghjklmnpqrstvwxyz]/i; // Case-insensitive regex for consonants
+        const numbersRegex = /\d/; // Regex for numbers
+
+        const hasVowels = vowelsRegex.test(email);
+        const hasConsonants = consonantsRegex.test(email);
+        const hasNumbers = numbersRegex.test(email);
+
+        // Check if it's a combination of vowels, consonants, and numbers
+        return hasVowels && hasConsonants && hasNumbers;
+      }
+
+      function validatePassword(password) {
+        const passwordRegex =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+        return passwordRegex.test(password);
+      }
+
+      function validateUsername(username) {
+        const usernameRegex = /^[a-zA-Z0-9]+$/;
+        return usernameRegex.test(username);
+      }
+
+      function signup() {
+        try {
+          const newUsername = document
+            .getElementById("newUsername")
+            .value.trim();
+          const newEmail = document.getElementById("newEmail").value.trim();
+          const newPassword = document
+            .getElementById("newPassword")
+            .value.trim();
+          const newUserType = document
+            .getElementById("newUserType")
+            .value.trim();
+
+          if (!newUsername || !newEmail || !newPassword || !newUserType) {
+            throw "All fields are required for signup.";
+          }
+
+          if (!validateEmail(newEmail)) {
+            throw "Invalid email format.";
+          }
+
+          if (containsQuotes(newEmail)) {
+            throw "Email cannot contain quotes.";
+          }
+
+          if (hasConsecutiveVowelsOrConsonants(newEmail)) {
+            throw "Invalid email format. Please enter a valid email address.";
+          }
+
+          if (!isCombinationOfVowelsConsonantsNumbers(newEmail)) {
+            throw "Email should have a combination of vowels, consonants, and numbers";
+          }
+
+          if (!validatePassword(newPassword)) {
+            throw "Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one digit, and one special character.";
+          }
+
+          if (!validateUsername(newUsername)) {
+            throw "Enter a valid username. Your username seems like not a day-to-day name.";
+          }
+
+          if (hasConsecutiveVowelsOrConsonants(newUsername)) {
+            throw "I can't read your username. Seems like it is mispelled. Try readable username.Only 2 consecutive vowels or consonants are accepted.";
+          }
+
+          console.log("Signup - Username:", newUsername);
+          console.log("Signup - Email:", newEmail);
+          console.log("Signup - Password:", newPassword);
+          console.log("Signup - User Type:", newUserType);
+
+          // Perform signup process here
+
+          switchToLogin();
+
+          alert("Account created successfully!");
+        } catch (error) {
+          alert("Signup failed: " + error);
+        }
+      }
+
+      function login() {
+        try {
+          const username = document.getElementById("username").value.trim();
+          const password = document.getElementById("password").value.trim();
+          const userType = document.getElementById("userType").value.trim(); // Retrieve user type
+
+          if (!username || !password || !userType) {
+            throw "Username, password, and user type are required for login.";
+          }
+
+          if (!validateUsername(username)) {
+            throw "Enter a valid username. Your username seems like not a day-to-day name. Remove unnecessary characters";
+          }
+
+          if (hasConsecutiveVowelsOrConsonants(username)) {
+            throw "I can't read your username. Seems like it is misspelled. Try a readable username. Only 2 consecutive vowels or consonants are accepted.";
+          }
+
+          if (!isCombinationOfVowelsConsonantsNumbers(username)) {
+            throw "Try a stronger username like a combination of consonants, vowels, and numbers.";
+          }
+
+          if (!validatePassword(password)) {
+            throw "Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one digit, and one special character.";
+          }
+
+          console.log("Login - Username:", username);
+          console.log("Login - Password:", password);
+
+          alert("Login successful!");
+
+          setTimeout(function () {
+            if (userType === "buyer") {
+              window.location.href = "buyer.html";
+            } else if (userType === "seller") {
+              window.location.href = "seller.html";
+            } else {
+              throw "Invalid user type.";
+            }
+          }, 1000);
+        } catch (error) {
+          alert("Login failed: " + error);
+        }
+      }
+
+      function switchToSignup() {
+        document.getElementById("loginFormContainer").style.display = "none";
+        document.getElementById("signupFormContainer").style.display = "block";
+      }
+
+      function switchToLogin() {
+        document.getElementById("loginFormContainer").style.display = "block";
+        document.getElementById("signupFormContainer").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

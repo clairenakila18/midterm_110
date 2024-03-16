@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./assets/css/style.css" />
+
+		<!-- 
+    - google font link
+  -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Bangers&family=Carter+One&family=Nunito+Sans:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- 
+    - preload images
+  -->
+		<link rel="preload" as="image" href="./assets/images/cover3.png" />
+	</head>
+
+	<body id="top">
+		<!-- 
+    - #HEADER
+  -->
+
+
+		<header class="header" data-header>
+			<div class="container">
+				<button
+					class="nav-toggle-btn"
+					aria-label="toggle manu"
+					data-nav-toggler
+				>
+					<ion-icon
+						name="menu-outline"
+						aria-hidden="true"
+						class="menu-icon"
+					></ion-icon>
+					<ion-icon
+						name="close-outline"
+						aria-label="true"
+						class="close-icon"
+					></ion-icon>
+				</button>
+
+				<a href="#" class="logo">Oinkly</a>
+
+				<nav class="navbar" data-navbar>
+					<ul class="navbar-list">
+						<li class="navbar-item">
+							<a href="#home" class="navbar-link" data-nav-link>Home</a>
+						</li>
+
+						<li class="navbar-item">
+							<a href="#shop" class="navbar-link" data-nav-link>Shop</a>
+						</li>
+
+						<li class="navbar-item">
+							<a href="#category" class="navbar-link" data-nav-link>Category</a>
+						</li>
+
+						<li class="navbar-item">
+							<a href="#aboutus" class="navbar-link" data-nav-link>About Us</a>
+						</li>
+
+						<li class="navbar-item">
+							<a href="#contactus" class="navbar-link" data-nav-link
+								>Contact Us</a
+							>
+						</li>
+					</ul>
+				</nav>
+
+				<div class="header-actions">
+					<div class="search-container" id="searchContainer">
+						<input
+							type="text"
+							class="search-bar"
+							id="searchBar"
+							placeholder="Search..."
+						/>
+					</div>
+
+					<button class="action-btn" aria-label="Search">
+						<ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+					</button>
+
+					<button class="action-btn" aria-label="User" id="userProfileButton">
+						<ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+					</button>
+
+					<button class="action-btn" aria-label="cart" id="cartButton">
+						<ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+
+						<span class="btn-badge" id="cartBadge">0</span>
+					</button>
+				</div>
+			</div>
+		</header>
+
+		<!-- 
+    - #CART MODAL
+  -->
+
+		<div id="cartModal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2>Cart</h2>
+				<ul id="cartItems"></ul>
+				<p>Total: <span id="cartTotal">0</span></p>
+				<button id="checkoutBtn">Proceed to Checkout</button>
+			</div>
+		</div>
+
+		<div id="searchModal" class="modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+			<div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%;">
+				<span class="close" style="color: #aaaaaa; float: right; font-size: 28px; font-weight: bold;" onclick="closeModal()">&times;</span>
+				<h2>Search</h2>
+				<input type="text" id="searchInputModal" placeholder="Search..." style="margin-bottom: 10px; width: 100%; box-sizing: border-box; padding: 10px;">
+				<button id="searchButtonModal" style="background-color: blue; color: white; border: none; padding: 10px 20px; cursor: pointer;" onclick="redirectToBuyerPage()">Search</button>
+			</div>
+		</div>
+
+		<div id="profileModal" class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<h2>User Profile</h2>
+				<!-- Your profile content here -->
+				<button id="logoutButton" style="background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Logout</button>
+			</div>
+		</div>
+
+		<main>
+
+		<main>
+			<article>
+				<!-- 
+        - #HERO
+      -->
+
+				<section
+					class="section hero has-bg-image"
+					id="home"
+					aria-label="home"
+					style="background-image: url('./assets/images/cover1.png')"
+				>
+					<div class="container"></div>
+				</section>
+
+				<!-- 
+        - #CATEGORY
+      -->
+
+				<section class="section category" id="category" aria-label="category">
+					<div class="container">
+						<h2 class="h2 section-title">
+							<span class="span">Top</span> categories
+						</h2>
+
+						<ul class="has-scrollbar">
+							<li class="scrollbar-item">
+								<div class="category-card">
+									<figure
+										class="card-banner img-holder"
+										style="--width: 330; --height: 300"
+									>
+										<img
+											src="./assets/images/blackpig.png"
+											width="330"
+											height="300"
+											loading="lazy"
+											alt="Cat Food"
+											class="img-cover"
+										/>
+									</figure>
+
+									<h3 class="h3">
+										<a href="#" class="card-title">Black Piglets</a>
+									</h3>
+								</div>
+							</li>
+
+							<li class="scrollbar-item">
+								<div class="category-card">
+									<figure
+										class="card-banner img-holder"
+										style="--width: 330; --height: 300"
+									>
+										<img
+											src="./assets/images/whitepig.png"
+											width="330"
+											height="300"
+											loading="lazy"
+											alt="Cat Toys"
+											class="img-cover"
+										/>
+									</figure>
+
+									<h3 class="h3">
+										<a href="#" class="card-title">White Piglets</a>
+									</h3>
+								</div>
+							</li>
+
+							<li class="scrollbar-item">
+								<div class="category-card">
+									<figure
+										class="card-banner img-holder"
+										style="--width: 330; --height: 300"
+									>
+										<img
+											src="./assets/images/kunekune.png"
+											width="330"
+											height="300"
+											loading="lazy"
+											alt="Dog Food"
+											class="img-cover"
+										/>
+									</figure>
+
+									<h3 class="h3">
+										<a href="#" class="card-title">Imported Black Hogs</a>
+									</h3>
+								</div>
+							</li>
+
+							<li class="scrollbar-item">
+								<div class="category-card">
+									<figure
+										class="card-banner img-holder"
+										style="--width: 330; --height: 300"
+									>
+										<img
+											src="./assets/images/duroc.png"
+											width="330"
+											height="300"
+											loading="lazy"
+											alt="Dog Toys"
+											class="img-cover"
+										/>
+									</figure>
+
+									<h3 class="h3">
+										<a href="#" class="card-title">Imported Brown Hogs</a>
+									</h3>
+								</div>
+							</li>
+
+							<li class="scrollbar-item">
+								<div class="category-card">
+									<figure
+										class="card-banner img-holder"
+										style="--width: 330; --height: 300"
+									>
+										<img
+											src="./assets/images/britishsaddleback.png"
+											width="330"
+											height="300"
+											loading="lazy"
+											alt="Dog Sumpplements"
+											class="img-cover"
+										/>
+									</figure>
+
+									<h3 class="h3">
+										<a href="#" class="card-title">Bristish Breeds</a>
+									</h3>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- 
+        - #PRODUCT
+      -->
+
+				<section class="section product" id="shop" aria-label="product">
+					<div class="container">
+						<h2 class="h2 section-title">
+							<span class="span">Best</span> Seller
+						</h2>
+
+						<ul class="grid-list">
+							<li>
+								<div class="product-card">
+									<div
+										class="card-banner img-holder"
+										style="--width: 360; --height: 360"
+									>
+										<img
+											src="./assets/images/blackpig.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="blackpig"
+											class="img-cover default"
+										/>
+										<img
+											src="./assets/images/blackpig.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="blackpig"
+											class="img-cover hover"
+										/>
+
+										<button
+											class="card-action-btn"
+											aria-label="add to card"
+											title="Add To Cart"
+										>
+											<ion-icon
+												name="bag-add-outline"
+												aria-hidden="true"
+											></ion-icon>
+										</button>
+									</div>
+
+									<div class="card-content">
+										<div class="wrapper"> 
+                   <div class="rating-wrapper gray">
+                  <ion-icon name="star" aria-hidden="true"></ion-icon>
+                  <ion-icon name="star-half" aria-hidden="true"></ion-icon>
+                  <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
+                  <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
+                  <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
+              </div>
+
+											<span class="span" >(1)</span>
+										</div>
+
+										<h3 class="h3">
+											<a href="#" class="card-title">
+												Philippine Black Piglet</a
+											>
+										</h3>
+
+										<data class="card-price" value="3000.00">₱3000.00</data>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="product-card">
+									<div
+										class="card-banner img-holder"
+										style="--width: 360; --height: 360"
+									>
+										<img
+											src="./assets/images/whitepig.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="whitepig"
+											class="img-cover default"
+										/>
+										<img
+											src="./assets/images/whitepig.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="whitepig"
+											class="img-cover hover"
+										/>
+
+										<button
+											class="card-action-btn"
+											aria-label="add to card"
+											title="Add To Cart"
+										>
+											<ion-icon
+												name="bag-add-outline"
+												aria-hidden="true"
+											></ion-icon>
+										</button>
+									</div>
+
+									<div class="card-content">
+										<div class="wrapper">
+											<div class="rating-wrapper gray">
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star-half" aria-hidden="true"></ion-icon>
+											</div>
+
+											<span class="span">(0)</span>
+										</div>
+
+										<h3 class="h3">
+											<a href="#" class="card-title">Philippine White Piglet</a>
+										</h3>
+
+										<data class="card-price" value="3000.00">₱3000.00</data>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="product-card">
+									<div
+										class="card-banner img-holder"
+										style="--width: 360; --height: 360"
+									>
+										<img
+											src="./assets/images/britishsaddleback.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="britishsaddleback"
+											class="img-cover default"
+										/>
+										<img
+											src="./assets/images/britishsaddleback.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="britishsaddleback"
+											class="img-cover hover"
+										/>
+
+										<button
+											class="card-action-btn"
+											aria-label="add to card"
+											title="Add To Cart"
+										>
+											<ion-icon
+												name="bag-add-outline"
+												aria-hidden="true"
+											></ion-icon>
+										</button>
+									</div>
+
+									<div class="card-content">
+										<div class="wrapper">
+											<div class="rating-wrapper gray">
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+											</div>
+
+											<span class="span">(0)</span>
+										</div>
+
+										<h3 class="h3">
+											<a href="#" class="card-title">British Saddleback</a>
+										</h3>
+
+										<data class="card-price" value="4500.00">₱4500.00</data>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="product-card">
+									<div
+										class="card-banner img-holder"
+										style="--width: 360; --height: 360"
+									>
+										<img
+											src="./assets/images/hampsphire.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="hampsphire"
+											class="img-cover default"
+										/>
+										<img
+											src="./assets/images/hampsphire.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="hampsphire"
+											class="img-cover hover"
+										/>
+
+										<button
+											class="card-action-btn"
+											aria-label="add to card"
+											title="Add To Cart"
+										>
+											<ion-icon
+												name="bag-add-outline"
+												aria-hidden="true"
+											></ion-icon>
+										</button>
+									</div>
+
+									<div class="card-content">
+										<div class="wrapper">
+											<div class="rating-wrapper gray">
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+											</div>
+
+											<span class="span">(5)</span>
+										</div>
+
+										<h3 class="h3">
+											<a href="#" class="card-title">Hampsphire</a>
+										</h3>
+
+										<data class="card-price" value="8000.00">₱8000.00</data>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="product-card">
+									<div
+										class="card-banner img-holder"
+										style="--width: 360; --height: 360"
+									>
+										<img
+											src="./assets/images/hereford.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="hereford"
+											class="img-cover default"
+										/>
+										<img
+											src="./assets/images/hereford.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="hereford"
+											class="img-cover hover"
+										/>
+
+										<button
+											class="card-action-btn"
+											aria-label="add to card"
+											title="Add To Cart"
+										>
+											<ion-icon
+												name="bag-add-outline"
+												aria-hidden="true"
+											></ion-icon>
+										</button>
+									</div>
+
+									<div class="card-content">
+										<div class="wrapper">
+											<div class="rating-wrapper gray">
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+											</div>
+
+											<span class="span">(0)</span>
+										</div>
+
+										<h3 class="h3">
+											<a href="#" class="card-title">Hereford</a>
+										</h3>
+
+										<data class="card-price" value="6899.00">₱6899.00</data>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="product-card">
+									<div
+										class="card-banner img-holder"
+										style="--width: 360; --height: 360"
+									>
+										<img
+											src="./assets/images/duroc.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="duroc"
+											class="img-cover default"
+										/>
+										<img
+											src="./assets/images/duroc.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="duroc"
+											class="img-cover hover"
+										/>
+
+										<button
+											class="card-action-btn"
+											aria-label="add to card"
+											title="Add To Cart"
+										>
+											<ion-icon
+												name="bag-add-outline"
+												aria-hidden="true"
+											></ion-icon>
+										</button>
+									</div>
+
+									<div class="card-content">
+										<div class="wrapper">
+											<div class="rating-wrapper gray">
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+											</div>
+
+											<span class="span">(0)</span>
+										</div>
+
+										<h3 class="h3">
+											<a href="#" class="card-title">Duroc</a>
+										</h3>
+
+										<data class="card-price" value="7000.00">₱7000.00</data>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="product-card">
+									<div
+										class="card-banner img-holder"
+										style="--width: 360; --height: 360"
+									>
+										<img
+											src="./assets/images/kunekune.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="kunekune"
+											class="img-cover default"
+										/>
+										<img
+											src="./assets/images/kunekune.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="kunekune"
+											class="img-cover hover"
+										/>
+
+										<button
+											class="card-action-btn"
+											aria-label="add to card"
+											title="Add To Cart"
+										>
+											<ion-icon
+												name="bag-add-outline"
+												aria-hidden="true"
+											></ion-icon>
+										</button>
+									</div>
+
+									<div class="card-content">
+										<div class="wrapper">
+											<div class="rating-wrapper gray">
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+											</div>
+
+											<span class="span">(0)</span>
+										</div>
+
+										<h3 class="h3">
+											<a href="#" class="card-title">KuneKune</a>
+										</h3>
+
+										<data class="card-price" value="9500.00">$9500.00</data>
+									</div>
+								</div>
+							</li>
+
+							<li>
+								<div class="product-card">
+									<div
+										class="card-banner img-holder"
+										style="--width: 360; --height: 360"
+									>
+										<img
+											src="./assets/images/mangalica.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="mangalica"
+											class="img-cover default"
+										/>
+										<img
+											src="./assets/images/mangalica.png"
+											width="360"
+											height="360"
+											loading="lazy"
+											alt="mangalica"
+											class="img-cover hover"
+										/>
+
+										<button
+											class="card-action-btn"
+											aria-label="add to card"
+											title="Add To Cart"
+										>
+											<ion-icon
+												name="bag-add-outline"
+												aria-hidden="true"
+											></ion-icon>
+										</button>
+									</div>
+
+									<div class="card-content">
+										<div class="wrapper">
+											<div class="rating-wrapper gray">
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+												<ion-icon name="star" aria-hidden="true"></ion-icon>
+											</div>
+
+											<span class="span">(0)</span>
+										</div>
+
+										<h3 class="h3">
+											<a href="#" class="card-title">Mangalica</a>
+										</h3>
+
+										<data class="card-price" value="10000.00">₱10000.00</data>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<!-- 
+        - #SERVICE
+      -->
+
+				<section class="section service" id="aboutus" aria-label="service">
+					<div class="container">
+						<img
+							src="./assets/images/tagline.png"
+							width="122"
+							height="136"
+							loading="lazy"
+							alt=""
+							class="img"
+						/>
+
+						<h2 class="h2 section-title">
+							<span class="span">Oinkly ,</span> Products and Services.
+						</h2>
+
+						<ul class="grid-list">
+							<li>
+								<div class="service-card">
+									<figure class="card-icon">
+										<img
+											src="./assets/images/service-icon-1.png"
+											width="70"
+											height="70"
+											loading="lazy"
+											alt="service icon"
+										/>
+									</figure>
+
+									<h3 class="h3 card-title">Door-to-Door Delivery</h3>
+
+									<p class="card-text">
+										Enjoy ordering pigs without no hassle on transportation.
+									</p>
+								</div>
+							</li>
+
+							<li>
+								<div class="service-card">
+									<figure class="card-icon">
+										<img
+											src="./assets/images/service-icon-2.png"
+											width="70"
+											height="70"
+											loading="lazy"
+											alt="service icon"
+										/>
+									</figure>
+
+									<h3 class="h3 card-title">Collection of Pigs</h3>
+
+									<p class="card-text">
+										Buy Pigs either for breeding of for culinary preparation.
+									</p>
+								</div>
+							</li>
+
+							<li>
+								<div class="service-card">
+									<figure class="card-icon">
+										<img
+											src="./assets/images/service-icon-3.png"
+											width="70"
+											height="70"
+											loading="lazy"
+											alt="service icon"
+										/>
+									</figure>
+
+									<h3 class="h3 card-title">Secure Payment</h3>
+
+									<p class="card-text">
+										Pay at Oinkly only. No third-party involved.
+									</p>
+								</div>
+							</li>
+
+							<li>
+								<div class="service-card">
+									<figure class="card-icon">
+										<img
+											src="./assets/images/service-icon-4.png"
+											width="70"
+											height="70"
+											loading="lazy"
+											alt="service icon"
+										/>
+									</figure>
+
+									<h3 class="h3 card-title">24/7 Support</h3>
+
+									<p class="card-text">
+										Shop online here at Oinkly to get your orders. We will ship
+										it immediately.
+									</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</article>
+		</main>
+
+		<!-- 
+    - #FOOTER
+  -->
+
+		<footer
+			class="footer"
+			style="background-image: url('./assets/images/footer-bg.jpg')"
+		>
+			<div class="footer-top section" id="contactus">
+				<div class="container">
+					<div class="footer-brand">
+						<a href="#" class="logo">Oinkly</a>
+
+						<p class="footer-text">
+							If you have any question, please contact me at
+							<a href="mailto:clairenakila18@gmail.com" class="link"
+								>clairenakila18@gmail.com</a
+							>
+						</p>
+
+						<ul class="contact-list">
+							<li class="contact-item">
+								<ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+
+								<address class="address">
+									Alegria Surigao del Norte, Philippines
+								</address>
+							</li>
+
+							<li class="contact-item">
+								<ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+
+								<a href="tel:+639703738501" class="contact-link"
+									>(+63) 9703738501</a
+								>
+							</li>
+						</ul>
+
+						<ul class="social-list">
+							<li>
+								<a href="#" class="social-link">
+									<ion-icon name="logo-facebook"></ion-icon>
+								</a>
+							</li>
+
+							<li>
+								<a href="#" class="social-link">
+									<ion-icon name="logo-twitter"></ion-icon>
+								</a>
+							</li>
+
+							<li>
+								<a href="#" class="social-link">
+									<ion-icon name="logo-pinterest"></ion-icon>
+								</a>
+							</li>
+
+							<li>
+								<a href="#" class="social-link">
+									<ion-icon name="logo-instagram"></ion-icon>
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<ul class="footer-list">
+						<li>
+							<p class="footer-list-title">Corporate</p>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Careers</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">About Us</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Contact Us</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">FAQs</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Suppliers</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Affiliate Program</a>
+						</li>
+					</ul>
+
+					<ul class="footer-list">
+						<li>
+							<p class="footer-list-title">Information</p>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Online Store</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Privacy Policy</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Refund Policy</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Shipping Policy</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Terms of Service</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Track Order</a>
+						</li>
+					</ul>
+
+					<ul class="footer-list">
+						<li>
+							<p class="footer-list-title">Services</p>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Pig Marketplace</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Door-to-Door Delivery</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link"></a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Order Insurance</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Secure Transaaction</a>
+						</li>
+
+						<li>
+							<a href="#" class="footer-link">Resource Center</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="footer-bottom">
+				<div class="container">
+					<p class="copyright">
+						&copy; Nakila Company, All Rights Reserved
+						<a href="#" class="copyright-link">|Powered by Oinkly</a>
+					</p>
+
+					<img
+						src="./assets/images/payment.png"
+						width="397"
+						height="32"
+						loading="lazy"
+						alt="payment method"
+						class="img"
+					/>
+				</div>
+			</div>
+		</footer>
+
+		<!-- 
+    - #BACK TO TOP
+  -->
+
+		<a
+			href="#top"
+			class="back-top-btn"
+			aria-label="back to top"
+			data-back-top-btn
+		>
+			<ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+		</a>
+
+		<!-- 
+    - custom js link
+  -->
+		<!-- <script src="./assets/js/script.js" defer></script> -->
+
+		<!-- 
+    - ionicon link
+  -->
+		<script>
+			document
+				.getElementById("cartButton")
+				.addEventListener("click", function () {
+					openCartModal();
+				});
+
+			document.querySelector(".close").addEventListener("click", function () {
+				closeCartModal();
+			});
+
+			function openCartModal() {
+				const modal = document.getElementById("cartModal");
+				modal.style.display = "block";
+				displayCartItems();
+			}
+
+			function closeCartModal() {
+				const modal = document.getElementById("cartModal");
+				modal.style.display = "none";
+			}
+
+			function displayCartItems() {
+				const cartItems = document.getElementById("cartItems");
+				cartItems.innerHTML = "";
+				let totalPrice = 0;
+
+				cart.forEach((item) => {
+					const listItem = document.createElement("li");
+					listItem.textContent = `${item.productName} - ₱${item.price}`;
+					cartItems.appendChild(listItem);
+					totalPrice += parseFloat(item.price);
+				});
+
+				document.getElementById("cartTotal").textContent =
+					totalPrice.toFixed(2);
+			}
+
+		
+			document.getElementById("checkoutBtn").addEventListener("click", function () {
+    const totalAmount = parseFloat(
+        document.getElementById("cartTotal").textContent
+    );
+    alert(`Add Shipping Address! Total amount: ₱${totalAmount.toFixed(2)}`);
+
+    // Redirect to address.html
+    window.location.href = "address.html";
+
+    // Clear cart and perform other necessary actions
+    cart = [];
+    updateCartBadge();
+    closeCartModal();
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+        const userProfileButton = document.getElementById("userProfileButton");
+        const profileModal = document.getElementById("profileModal");
+        const closeButton = profileModal.querySelector(".close");
+        const logoutButton = profileModal.querySelector("#logoutButton");
+
+        userProfileButton.addEventListener("click", function() {
+            profileModal.style.display = "block";
+        });
+
+        closeButton.addEventListener("click", function() {
+            profileModal.style.display = "none";
+        });
+
+        logoutButton.addEventListener("click", function() {
+            window.location.href = "index.html"; // Redirect to index.html
+        });
+
+        window.addEventListener("click", function(event) {
+            if (event.target == profileModal) {
+                profileModal.style.display = "none";
+            }
+        });
+    });
+					
+		</script>
+     <script>
+ 
+    let cart = [];
+
+    function addToCart(productName, price) {
+      cart.push({ productName, price });
+
+      updateCartBadge();
+    }
+
+    function updateCartBadge() {
+      const cartBadge = document.querySelector('.btn-badge');
+
+      cartBadge.textContent = cart.length;
+    }
+
+    document.querySelectorAll('.card-action-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const card = this.closest('.product-card');
+        const productName = card.querySelector('.card-title').textContent;
+        const price = card.querySelector('.card-price').getAttribute('value');
+
+        addToCart(productName, price);
+      });
+    });
+
+
+        // Get the search icon button
+var searchButton = document.querySelector('[aria-label="Search"]');
+
+// Get the modal element
+var searchModal = document.getElementById('searchModal');
+
+// Get the close button inside the modal
+var closeButton = searchModal.querySelector('.close');
+
+// When the search icon button is clicked, open the modal
+searchButton.addEventListener('click', function() {
+    searchModal.style.display = 'block';
+});
+
+// When the close button is clicked, close the modal
+closeButton.addEventListener('click', function() {
+    searchModal.style.display = 'none';
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener('click', function(event) {
+    if (event.target == searchModal) {
+        searchModal.style.display = 'none';
+    }
+});
+
+// Function to close the modal
+function closeModal() {
+        document.getElementById('searchModal').style.display = "none";
+    }
+
+    // Function to redirect to the buyer.html page
+    function redirectToBuyerPage() {
+        window.location.href = "buyer.html";
+    }
+
+
+    </script> 
+
+    
+
+    
+		<script
+			type="module"
+			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+		></script>
+		<script
+			nomodule
+			src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+		></script>
+	</body>
+</html>
